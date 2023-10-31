@@ -1,21 +1,10 @@
 AWSTemplateFormatVersion: 2010-09-09
 Description: "Ec2 instance automation for dev environment"
 Metadata: {}
-Parameters: 
-  DevWebserverKeyName:
-    Description: Please select a key pair
-    Type: AWS::EC2::KeyPair::KeyName
-  
-Mappings:
-  DevWebserverGoldenAMImap:
-    us-east-1:
-      GoldenAMI: ami-0fc5d935ebf8bc3bc
-    us-east-2:
-      GoldenAMI: ami-0e83be366243f524a
-    us-west-1:
-      GoldenAMI: ami-0cbd40f694b804622
-    us-west-2:
-      GoldenAMI: ami-0efcece6bed30fd98
+
+Parameters: {}
+
+Mappings: {}
 
 Conditions: {} 
 
@@ -23,10 +12,12 @@ Resources:
   devWebServer:
     Type: AWS::EC2::Instance
     Properties:
-      KeyName: !Ref DevWebserverKeyName
-      ImageId: !FindInMap [ DevWebserverGoldenAMImap, !Ref 'AWS::Region', GoldenAMI]
+      KeyName: Nvirginia 
+      ImageId: ami-03f65b8614a860c29
       InstanceType: t2.micro
       Monitoring: true
+      SecurityGroupIds:
+        - sg-003331feb35d5deb9
       UserData: !Base64 |
         #!/bin/bash 
         sudo su
